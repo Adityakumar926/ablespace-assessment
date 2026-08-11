@@ -27,7 +27,7 @@ export function Navbar({ viewMode, onViewChange, onOpenNewTask, guestUser, onOpe
               AbleSpace
             </span>
             <span className="block text-[10px] font-mono text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wider">
-              Task Engine
+              Caseload Workspace
             </span>
           </div>
         </Link>
@@ -78,7 +78,7 @@ export function Navbar({ viewMode, onViewChange, onOpenNewTask, guestUser, onOpe
             ) : (
               <>
                 <User className="w-3.5 h-3.5 text-sky-500" />
-                <span>Guest Login</span>
+                <span>Guest Access</span>
               </>
             )}
           </button>

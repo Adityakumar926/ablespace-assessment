@@ -36,7 +36,6 @@ export default function TaskPage() {
 
   useEffect(() => {
     loadData();
-    // Auto guest session initialization
     loginGuest().then(g => setGuestUser(g));
   }, [priorityFilter, searchQuery]);
 
@@ -95,17 +94,17 @@ export default function TaskPage() {
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-        {/* Banner: AbleSpace Assessment Title & Part 2 Link */}
+        {/* Dashboard Header Banner */}
         <div className="theme-bg-card p-6 sm:p-8 rounded-3xl border theme-border shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20">
-              <Sparkles className="w-3.5 h-3.5" /> AbleSpace Technical Assessment
+              <Sparkles className="w-3.5 h-3.5" /> Educator Workspace
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold theme-text-main tracking-tight">
-              Task Management System
+              Caseload & Goal Tasks
             </h1>
             <p className="text-xs theme-text-muted max-w-2xl leading-relaxed">
-              Full Stack Task Management Dashboard built with Next.js App Router, Tailwind CSS, multi-theme persistence, Guest Login, and NestJS API integration.
+              Organize IEP goal tracking deliverables, session notes, and multidisciplinary team action items in real-time.
             </p>
           </div>
 
@@ -114,7 +113,7 @@ export default function TaskPage() {
               onClick={() => setIsGuestModalOpen(true)}
               className="px-4 py-2.5 rounded-2xl bg-sky-500/10 hover:bg-sky-500/20 text-sky-600 dark:text-sky-400 text-xs font-bold flex items-center justify-center gap-2 border border-sky-500/20 transition"
             >
-              <UserCheck className="w-4 h-4" /> Guest Portal
+              <UserCheck className="w-4 h-4" /> Guest Educator
             </button>
 
             <a
@@ -123,7 +122,7 @@ export default function TaskPage() {
               rel="noreferrer"
               className="px-4 py-2.5 rounded-2xl bg-slate-900 dark:bg-slate-800 text-white text-xs font-bold flex items-center justify-center gap-2 hover:bg-slate-800 transition shadow"
             >
-              <FileText className="w-4 h-4 text-sky-400" /> View Part 2 Report
+              <FileText className="w-4 h-4 text-sky-400" /> Part 2 Report
             </a>
           </div>
         </div>
@@ -168,7 +167,7 @@ export default function TaskPage() {
         {/* Board or List View Rendering */}
         {loading ? (
           <div className="py-20 text-center text-xs theme-text-muted font-mono">
-            Loading tasks data...
+            Loading tasks...
           </div>
         ) : viewMode === 'board' ? (
           <TaskBoard

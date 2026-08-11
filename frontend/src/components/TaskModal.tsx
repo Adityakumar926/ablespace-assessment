@@ -52,7 +52,7 @@ export function TaskModal({ isOpen, onClose, onSave, initialTask }: TaskModalPro
       <div className="theme-bg-card rounded-3xl max-w-lg w-full p-6 border theme-border shadow-2xl space-y-6">
         <div className="flex items-center justify-between border-b theme-border pb-4">
           <h3 className="text-lg font-bold theme-text-main">
-            {initialTask ? 'Edit Task' : 'Create New AbleSpace Task'}
+            {initialTask ? 'Edit Task' : 'Create New Task'}
           </h3>
           <button
             onClick={onClose}
