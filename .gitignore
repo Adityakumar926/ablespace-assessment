@@ -9,6 +9,10 @@ frontend/out/
 # NestJS build
 backend/dist/
 
+# Netlify local cache
+.netlify/
+frontend/.netlify/
+
 # OS / IDE
 .DS_Store
 *.log
