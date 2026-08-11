@@ -14,6 +14,10 @@ export interface Task {
 
 const API_BASE = 'http://localhost:4000/api';
 
+function isLocalHost(): boolean {
+  return typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+}
+
 const fallbackTasks: Task[] = [
   {
     id: 'task-101',
@@ -70,49 +74,55 @@ const fallbackTasks: Task[] = [
 ];
 
 export async function fetchTasks(status?: string, priority?: string, search?: string): Promise<Task[]> {
-  try {
-    const params = new URLSearchParams();
-    if (status) params.set('status', status);
-    if (priority) params.set('priority', priority);
-    if (search) params.set('search', search);
+  if (isLocalHost()) {
+    try {
+      const params = new URLSearchParams();
+      if (status) params.set('status', status);
+      if (priority) params.set('priority', priority);
+      if (search) params.set('search', search);
 
-    const res = await fetch(`${API_BASE}/tasks?${params.toString()}`);
-    if (res.ok) {
-      const data = await res.json();
-      return data.data;
+      const res = await fetch(`${API_BASE}/tasks?${params.toString()}`);
+      if (res.ok) {
+        const data = await res.json();
+        return data.data;
+      }
+    } catch (e) {
+      console.warn('Backend API offline, using persistent local store');
     }
-  } catch (e) {
-    console.warn('Backend API offline, using persistent local store');
   }
 
-  // Local fallback persistence
+  // Client-side persistent store
   let local = fallbackTasks;
   const saved = typeof window !== 'undefined' ? localStorage.getItem('ablespace_tasks') : null;
   if (saved) {
     local = JSON.parse(saved);
+  } else if (typeof window !== 'undefined') {
+    localStorage.setItem('ablespace_tasks', JSON.stringify(fallbackTasks));
   }
 
   if (status) local = local.filter(t => t.status === status);
   if (priority) local = local.filter(t => t.priority === priority);
   if (search) {
     const q = search.toLowerCase();
-    local = local.filter(t => t.title.toLowerCase().includes(q) || t.description.toLowerCase().includes(q));
+    local = local.filter(t => t.title.toLowerCase().includes(q) || t.description.toLowerCase().includes(q) || t.category.toLowerCase().includes(q));
   }
   return local;
 }
 
 export async function createTask(taskData: Partial<Task>): Promise<Task> {
-  try {
-    const res = await fetch(`${API_BASE}/tasks`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(taskData),
-    });
-    if (res.ok) {
-      const data = await res.json();
-      return data.data;
-    }
-  } catch (e) {}
+  if (isLocalHost()) {
+    try {
+      const res = await fetch(`${API_BASE}/tasks`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(taskData),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        return data.data;
+      }
+    } catch (e) {}
+  }
 
   const newTask: Task = {
     id: 'task-' + Date.now(),
@@ -135,17 +145,19 @@ export async function createTask(taskData: Partial<Task>): Promise<Task> {
 }
 
 export async function updateTask(id: string, updates: Partial<Task>): Promise<Task> {
-  try {
-    const res = await fetch(`${API_BASE}/tasks/${id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updates),
-    });
-    if (res.ok) {
-      const data = await res.json();
-      return data.data;
-    }
-  } catch (e) {}
+  if (isLocalHost()) {
+    try {
+      const res = await fetch(`${API_BASE}/tasks/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updates),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        return data.data;
+      }
+    } catch (e) {}
+  }
 
   const tasks = await fetchTasks();
   const idx = tasks.findIndex(t => t.id === id);
@@ -158,10 +170,12 @@ export async function updateTask(id: string, updates: Partial<Task>): Promise<Ta
 }
 
 export async function deleteTask(id: string): Promise<boolean> {
-  try {
-    const res = await fetch(`${API_BASE}/tasks/${id}`, { method: 'DELETE' });
-    if (res.ok) return true;
-  } catch (e) {}
+  if (isLocalHost()) {
+    try {
+      const res = await fetch(`${API_BASE}/tasks/${id}`, { method: 'DELETE' });
+      if (res.ok) return true;
+    } catch (e) {}
+  }
 
   let tasks = await fetchTasks();
   tasks = tasks.filter(t => t.id !== id);
@@ -170,13 +184,15 @@ export async function deleteTask(id: string): Promise<boolean> {
 }
 
 export async function loginGuest(): Promise<{ token: string; username: string }> {
-  try {
-    const res = await fetch(`${API_BASE}/auth/guest`, { method: 'POST' });
-    if (res.ok) {
-      const data = await res.json();
-      return { token: data.token, username: data.session.username };
-    }
-  } catch (e) {}
+  if (isLocalHost()) {
+    try {
+      const res = await fetch(`${API_BASE}/auth/guest`, { method: 'POST' });
+      if (res.ok) {
+        const data = await res.json();
+        return { token: data.token, username: data.session.username };
+      }
+    } catch (e) {}
+  }
 
   return { token: 'guest_token_' + Date.now(), username: 'Guest Educator' };
 }
