@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Next.js build
+frontend/.next/
+frontend/out/
+
+# NestJS build
+backend/dist/
+
+# OS / IDE
+.DS_Store
+*.log
+.vscode/
+.idea/
