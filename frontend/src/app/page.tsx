@@ -105,7 +105,7 @@ export default function TaskPage() {
 
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <a
-              href="https://github.com/Adityakumar926/lead-platform"
+              href="https://github.com/Adityakumar926/ablespace-assessment/blob/main/part-2/part_2_product_understanding.md"
               target="_blank"
               rel="noreferrer"
               className="px-4 py-2.5 rounded-2xl bg-slate-900 dark:bg-slate-800 text-white text-xs font-bold flex items-center justify-center gap-2 hover:bg-slate-800 transition shadow"
