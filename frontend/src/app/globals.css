@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base Resets */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+}
+
+/* Theme 1: Light Mode (Default AbleSpace) */
+html.light {
+  --bg-primary: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-header: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --brand-primary: #0284c7;
+  --brand-hover: #0369a1;
+}
+
+/* Theme 2: Dark Mode */
+html.dark {
+  --bg-primary: #0f172a;
+  --bg-card: #1e293b;
+  --bg-header: #090d16;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+  --brand-primary: #38bdf8;
+  --brand-hover: #0284c7;
+}
+
+/* Theme 3: Emerald Mode */
+html.emerald {
+  --bg-primary: #f0fdf4;
+  --bg-card: #ffffff;
+  --bg-header: #064e3b;
+  --text-main: #064e3b;
+  --text-muted: #047857;
+  --border-color: #bbf7d0;
+  --brand-primary: #059669;
+  --brand-hover: #047857;
+}
+
+/* Theme 4: Purple Mode */
+html.purple {
+  --bg-primary: #faf5ff;
+  --bg-card: #ffffff;
+  --bg-header: #4c1d95;
+  --text-main: #3b0764;
+  --text-muted: #7e22ce;
+  --border-color: #e9d5ff;
+  --brand-primary: #9333ea;
+  --brand-hover: #7e22ce;
+}
+
+.theme-bg-main { background-color: var(--bg-primary); }
+.theme-bg-card { background-color: var(--bg-card); }
+.theme-text-main { color: var(--text-main); }
+.theme-text-muted { color: var(--text-muted); }
+.theme-border { border-color: var(--border-color); }
