@@ -5,8 +5,9 @@ import { Navbar } from '../components/Navbar';
 import { TaskBoard } from '../components/TaskBoard';
 import { TaskList } from '../components/TaskList';
 import { TaskModal } from '../components/TaskModal';
+import { GuestLoginModal } from '../components/GuestLoginModal';
 import { Task, fetchTasks, createTask, updateTask, deleteTask, loginGuest } from '../lib/api';
-import { Search, Filter, RefreshCw, FileText, CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react';
+import { Search, Filter, RefreshCw, FileText, Sparkles, UserCheck } from 'lucide-react';
 
 export default function TaskPage() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -17,8 +18,9 @@ export default function TaskPage() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [priorityFilter, setPriorityFilter] = useState<string>('');
 
-  // Modal state
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  // Modals state
+  const [isTaskModalOpen, setIsTaskModalOpen] = useState<boolean>(false);
+  const [isGuestModalOpen, setIsGuestModalOpen] = useState<boolean>(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [defaultNewStatus, setDefaultNewStatus] = useState<Task['status']>('TODO');
 
@@ -34,14 +36,14 @@ export default function TaskPage() {
 
   useEffect(() => {
     loadData();
-    // Auto guest session initialization for assessment convenience
+    // Auto guest session initialization
     loginGuest().then(g => setGuestUser(g));
   }, [priorityFilter, searchQuery]);
 
-  const handleGuestLogin = async () => {
+  const handleGuestLoginSubmit = async (username: string) => {
     const session = await loginGuest();
-    setGuestUser(session);
-    alert(`Logged in as ${session.username}! Session Token: ${session.token.substring(0, 20)}...`);
+    const updatedSession = { ...session, username };
+    setGuestUser(updatedSession);
   };
 
   const handleSaveTask = async (taskData: Partial<Task>) => {
@@ -49,7 +51,11 @@ export default function TaskPage() {
       const updated = await updateTask(editingTask.id, taskData);
       setTasks(prev => prev.map(t => t.id === updated.id ? updated : t));
     } else {
-      const created = await createTask({ ...taskData, status: taskData.status || defaultNewStatus });
+      const created = await createTask({
+        ...taskData,
+        status: taskData.status || defaultNewStatus,
+        assignee: guestUser?.username || 'Guest Educator',
+      });
       setTasks(prev => [created, ...prev]);
     }
   };
@@ -68,12 +74,12 @@ export default function TaskPage() {
   const handleOpenNewTask = (status: Task['status'] = 'TODO') => {
     setEditingTask(null);
     setDefaultNewStatus(status);
-    setIsModalOpen(true);
+    setIsTaskModalOpen(true);
   };
 
   const handleOpenEditTask = (task: Task) => {
     setEditingTask(task);
-    setIsModalOpen(true);
+    setIsTaskModalOpen(true);
   };
 
   return (
@@ -84,7 +90,7 @@ export default function TaskPage() {
         onViewChange={setViewMode}
         onOpenNewTask={() => handleOpenNewTask('TODO')}
         guestUser={guestUser}
-        onGuestLogin={handleGuestLogin}
+        onOpenGuestModal={() => setIsGuestModalOpen(true)}
       />
 
       {/* Main Content Area */}
@@ -104,6 +110,13 @@ export default function TaskPage() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <button
+              onClick={() => setIsGuestModalOpen(true)}
+              className="px-4 py-2.5 rounded-2xl bg-sky-500/10 hover:bg-sky-500/20 text-sky-600 dark:text-sky-400 text-xs font-bold flex items-center justify-center gap-2 border border-sky-500/20 transition"
+            >
+              <UserCheck className="w-4 h-4" /> Guest Portal
+            </button>
+
             <a
               href="https://github.com/Adityakumar926/ablespace-assessment/blob/main/part-2/part_2_product_understanding.md"
               target="_blank"
@@ -177,10 +190,18 @@ export default function TaskPage() {
 
       {/* Task Modal (Create & Edit) */}
       <TaskModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        isOpen={isTaskModalOpen}
+        onClose={() => setIsTaskModalOpen(false)}
         onSave={handleSaveTask}
         initialTask={editingTask}
+      />
+
+      {/* Guest Login Modal */}
+      <GuestLoginModal
+        isOpen={isGuestModalOpen}
+        onClose={() => setIsGuestModalOpen(false)}
+        onLogin={handleGuestLoginSubmit}
+        currentGuest={guestUser}
       />
     </div>
   );

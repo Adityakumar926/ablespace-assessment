@@ -3,17 +3,17 @@
 import React from 'react';
 import Link from 'next/link';
 import { ThemeSwitcher } from './ThemeSwitcher';
-import { LayoutGrid, List, Plus, User, ShieldCheck, Sparkles } from 'lucide-react';
+import { LayoutGrid, List, Plus, User, ShieldCheck } from 'lucide-react';
 
 interface NavbarProps {
   viewMode: 'board' | 'list';
   onViewChange: (mode: 'board' | 'list') => void;
   onOpenNewTask: () => void;
   guestUser: { username: string; token: string } | null;
-  onGuestLogin: () => void;
+  onOpenGuestModal: () => void;
 }
 
-export function Navbar({ viewMode, onViewChange, onOpenNewTask, guestUser, onGuestLogin }: NavbarProps) {
+export function Navbar({ viewMode, onViewChange, onOpenNewTask, guestUser, onOpenGuestModal }: NavbarProps) {
   return (
     <header className="sticky top-0 z-40 theme-bg-card border-b theme-border shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
@@ -61,20 +61,27 @@ export function Navbar({ viewMode, onViewChange, onOpenNewTask, guestUser, onGue
             </button>
           </div>
 
-          {/* Guest User / Login */}
-          {guestUser ? (
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-bold">
-              <ShieldCheck className="w-4 h-4" />
-              <span className="hidden md:inline">{guestUser.username}</span>
-            </div>
-          ) : (
-            <button
-              onClick={onGuestLogin}
-              className="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-semibold text-xs border theme-border flex items-center gap-1.5 transition"
-            >
-              <User className="w-3.5 h-3.5 text-sky-500" /> Guest Login
-            </button>
-          )}
+          {/* Guest User / Login Button */}
+          <button
+            onClick={onOpenGuestModal}
+            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl border text-xs font-semibold transition ${
+              guestUser
+                ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20'
+                : 'bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 theme-border'
+            }`}
+          >
+            {guestUser ? (
+              <>
+                <ShieldCheck className="w-4 h-4" />
+                <span className="hidden md:inline">{guestUser.username}</span>
+              </>
+            ) : (
+              <>
+                <User className="w-3.5 h-3.5 text-sky-500" />
+                <span>Guest Login</span>
+              </>
+            )}
+          </button>
 
           {/* Create Task Button */}
           <button
