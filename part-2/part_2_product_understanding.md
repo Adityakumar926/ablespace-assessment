@@ -2,6 +2,7 @@
 
 **Company**: AbleSpace  
 **Role**: Full Stack Developer (Fresher)  
+**Live Deployed Application**: https://ablespaceassisment.netlify.app/  
 **Subject**: In-Depth Workflow Analysis of the AbleSpace "Take Data" Screen (Caseload Tab) & UX/UI Improvement Recommendations  
 
 ---

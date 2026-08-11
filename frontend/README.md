@@ -1,5 +1,6 @@
 # AbleSpace Task Management System - Frontend
 
+**Live Deployed Application**: [https://ablespaceassisment.netlify.app/](https://ablespaceassisment.netlify.app/)  
 **Tech Stack**: Next.js 14 (App Router) + TypeScript + Tailwind CSS + Lucide React + Multi-Theme Provider  
 **Port**: `3000` (`http://localhost:3000`)  
 

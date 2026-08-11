@@ -3,7 +3,18 @@
 **Candidate**: Aditya Kumar  
 **Role**: Full Stack Developer (Fresher)  
 **Company**: AbleSpace  
+**Live Deployed Application**: [https://ablespaceassisment.netlify.app/](https://ablespaceassisment.netlify.app/)  
+**GitHub Repository**: [https://github.com/Adityakumar926/ablespace-assessment](https://github.com/Adityakumar926/ablespace-assessment)  
 **Figma Reference**: [Assessment Task Figma Design](https://www.figma.com/design/obONCFmoTFN27V5H9PHS2X/Assessment-Task?node-id=0-1)  
+
+---
+
+## 🌐 Live Application & Submission Links
+
+- 🚀 **Live Working URL**: [https://ablespaceassisment.netlify.app/](https://ablespaceassisment.netlify.app/)
+- 📦 **GitHub Repository**: [https://github.com/Adityakumar926/ablespace-assessment](https://github.com/Adityakumar926/ablespace-assessment)
+- 📄 **Part 2 Report (Markdown)**: [`part-2/part_2_product_understanding.md`](./part-2/part_2_product_understanding.md)
+- 📄 **Part 2 Report (PDF)**: [`part-2/part_2_product_understanding.pdf`](./part-2/part_2_product_understanding.pdf)
 
 ---
 
@@ -20,7 +31,8 @@ AbleSpace/
 │   ├── Tasks Module (`GET`, `POST`, `PATCH`, `DELETE /api/tasks`)
 │   └── Themes Module (`GET`, `POST /api/themes`)
 ├── part-2/
-│   └── part_2_product_understanding.md   # AbleSpace "Take Data" workflow breakdown & UX report
+│   ├── part_2_product_understanding.md   # AbleSpace "Take Data" workflow breakdown & UX report
+│   └── part_2_product_understanding.pdf  # PDF copy of Part 2 submission
 └── README.md                     # Monorepo setup & evaluation guide
 ```
 
