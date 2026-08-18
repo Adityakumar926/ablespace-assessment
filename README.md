@@ -13,8 +13,10 @@
 
 - 🚀 **Live Working URL**: [https://ablespaceassisment.netlify.app/](https://ablespaceassisment.netlify.app/)
 - 📦 **GitHub Repository**: [https://github.com/Adityakumar926/ablespace-assessment](https://github.com/Adityakumar926/ablespace-assessment)
-- 📄 **Part 2 Report (Markdown)**: [`part-2/part_2_product_understanding.md`](./part-2/part_2_product_understanding.md)
-- 📄 **Part 2 Report (PDF)**: [`part-2/part_2_product_understanding.pdf`](./part-2/part_2_product_understanding.pdf)
+- 📸 **Application Walkthrough (Markdown)**: [`part-2/AbleSpace_Application_Walkthrough.md`](./part-2/AbleSpace_Application_Walkthrough.md)
+- 📄 **Application Walkthrough (PDF)**: [`part-2/AbleSpace_Application_Walkthrough.pdf`](./part-2/AbleSpace_Application_Walkthrough.pdf)
+- 📄 **Part 2 Product Report (Markdown)**: [`part-2/part_2_product_understanding.md`](./part-2/part_2_product_understanding.md)
+- 📄 **Part 2 Product Report (PDF)**: [`part-2/part_2_product_understanding.pdf`](./part-2/part_2_product_understanding.pdf)
 
 ---
 
@@ -22,18 +24,22 @@
 
 ```
 AbleSpace/
-├── frontend/                     # Next.js 14 App Router + Tailwind CSS + TypeScript
+├── frontend/                             # Next.js 14 App Router + Tailwind CSS + TypeScript
 │   ├── Multi-Theme System (Light, Dark, Emerald, Purple with LocalStorage persistence)
-│   ├── Guest Login & Session Manager
+│   ├── Guest Login & Session Token Manager
 │   └── Task Management System (Kanban & List views, Filters, Search, Task CRUD)
-├── backend/                      # NestJS REST API Server (TypeScript)
+├── backend/                              # NestJS REST API Server (TypeScript)
 │   ├── Guest Auth Module (`POST /api/auth/guest`)
 │   ├── Tasks Module (`GET`, `POST`, `PATCH`, `DELETE /api/tasks`)
 │   └── Themes Module (`GET`, `POST /api/themes`)
 ├── part-2/
+│   ├── screenshots/                      # 7 Application Screenshots (Kanban, List, Themes, Guest Modal)
+│   ├── AbleSpace_Application_Walkthrough.md   # Visual Application Walkthrough Report
+│   ├── AbleSpace_Application_Walkthrough.pdf  # PDF copy of Walkthrough Report
 │   ├── part_2_product_understanding.md   # AbleSpace "Take Data" workflow breakdown & UX report
 │   └── part_2_product_understanding.pdf  # PDF copy of Part 2 submission
-└── README.md                     # Monorepo setup & evaluation guide
+├── netlify.toml                          # Netlify monorepo deployment config
+└── README.md                             # Monorepo setup & evaluation guide
 ```
 
 ---
@@ -54,11 +60,10 @@ AbleSpace/
 
 ---
 
-## 📋 Part 2: Product Understanding Report
+## 📋 Part 2: Product Understanding & Walkthrough Reports
 
-Located at [`part-2/part_2_product_understanding.md`](./part-2/part_2_product_understanding.md):
-1. **Workflow Breakdown**: Detailed analysis of the AbleSpace "Take Data" screen from the Caseload tab (Special Education IEP goal tracking, trial counts, prompt hierarchy, frequency tallying, and timers).
-2. **UX/UI Audit & Recommendations**: 5 concrete usability and functional enhancements (One-Handed Mobile Data Mode, Group Session View, Hands-Free Voice Logging, Offline-First Sync Queue, Real-Time Mastery Alerts).
+1. **Visual Walkthrough Report**: Located at [`part-2/AbleSpace_Application_Walkthrough.md`](./part-2/AbleSpace_Application_Walkthrough.md) featuring 7 screenshot figures showcasing all features, themes, modals, and micro-interactions.
+2. **Product Analysis Report**: Located at [`part-2/part_2_product_understanding.md`](./part-2/part_2_product_understanding.md) detailing the AbleSpace "Take Data" screen from the Caseload tab and 5 UX/UI recommendations.
 
 ---
 
